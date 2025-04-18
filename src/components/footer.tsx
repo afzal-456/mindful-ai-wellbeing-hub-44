@@ -34,32 +34,32 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold mb-4">Features</h3>
             <ul className="space-y-2">
-              <li><Link to="/ai-therapist" className="text-gray-300 hover:text-white">AI Therapist</Link></li>
-              <li><Link to="/relaxation" className="text-gray-300 hover:text-white">Relaxation Tools</Link></li>
-              <li><Link to="/games" className="text-gray-300 hover:text-white">Mental Games</Link></li>
-              <li><Link to="/community" className="text-gray-300 hover:text-white">Community Groups</Link></li>
-              <li><Link to="/therapists" className="text-gray-300 hover:text-white">Live Therapists</Link></li>
+              <li><a href="/therapy" className="text-gray-300 hover:text-white">AI Therapist</a></li>
+              <li><a href="/tools" className="text-gray-300 hover:text-white">Relaxation Tools</a></li>
+              <li><a href="/tools" className="text-gray-300 hover:text-white">Mental Games</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Community Groups</a></li>
+              <li><a href="/therapy" className="text-gray-300 hover:text-white">Live Therapists</a></li>
             </ul>
           </div>
           
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-300 hover:text-white">About Us</Link></li>
-              <li><Link to="/team" className="text-gray-300 hover:text-white">Our Team</Link></li>
-              <li><Link to="/careers" className="text-gray-300 hover:text-white">Careers</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
-              <li><Link to="/blog" className="text-gray-300 hover:text-white">Blog</Link></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">About Us</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Our Team</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Careers</a></li>
+              <li><a href="/contact" className="text-gray-300 hover:text-white">Contact</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Blog</a></li>
             </ul>
           </div>
           
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-gray-300 hover:text-white">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-gray-300 hover:text-white">Terms of Service</Link></li>
-              <li><Link to="/cookies" className="text-gray-300 hover:text-white">Cookie Policy</Link></li>
-              <li><Link to="/disclaimer" className="text-gray-300 hover:text-white">Medical Disclaimer</Link></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Privacy Policy</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Terms of Service</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Cookie Policy</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-white">Medical Disclaimer</a></li>
             </ul>
           </div>
         </div>
