@@ -6,11 +6,11 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const About = () => {
   const team = [
-    { name: "Dr. Sanjay Mehta", role: "Co-founder & Chief Medical Officer", avatar: "SM" },
-    { name: "Priya Sharma", role: "Co-founder & CEO", avatar: "PS" },
-    { name: "Arjun Kapoor", role: "Chief Technology Officer", avatar: "AK" },
-    { name: "Dr. Neha Gupta", role: "Head of Therapy", avatar: "NG" },
-    { name: "Dr. Maya Patel", role: "Head of AI Research", avatar: "MP" }
+    { name: "Moieen Rasheed Mir", role: "Frontend Developer ", avatar: "MRM" },
+    { name: "Mohammed Saqlain", role: "Ml Developer", avatar: "SQ" },
+    { name: "Mohammed Afzal", role: "Backend Developer", avatar: "MA" },
+    { name: "Milan Saini", role: "Ai Chatbot", avatar: "MS" },
+    { name: "Mayank Nager", role: "Web Designer", avatar: "MN" }
   ];
 
   return (
