@@ -30,10 +30,10 @@ const HeroSection = () => {
               <div className="absolute -bottom-6 -right-6 w-28 h-28 bg-wellness-light rounded-full -z-10"></div>
               <div className="rounded-2xl shadow-xl overflow-hidden border border-wellness-secondary">
                 <img
-                  src="/lovable-uploads/13c05d73-baf4-4cab-a127-191d9e6d39b6.png"
-                  alt="AI-powered mental health platform mobile interface"
-                  className="w-full object-cover"
-                />
+                 // src="/lovable-uploads/13c05d73-baf4-4cab-a127-191d9e6d39b6.png"
+                 // alt="AI-powered mental health platform mobile interface"
+                 // className="w-full object-cover"
+               />
               </div>
             </div>
           </div>
