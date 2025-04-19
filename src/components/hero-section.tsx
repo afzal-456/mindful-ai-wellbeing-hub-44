@@ -16,11 +16,11 @@ const HeroSection = () => {
               24/7 emotional support, self-care tools, and access to live therapists—all in one place.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-delay-2">
-              <Button className="bg-wellness-primary hover:bg-wellness-dark text-white px-8 py-6 text-lg">
-                Start Free Trial
+              <Button className="bg-wellness-primary hover:bg-wellness-dark text-white px-8 py-6 text-lg" asChild>
+                <Link to="/free-trial">Start Free Trial</Link>
               </Button>
-              <Button variant="outline" className="border-wellness-primary text-wellness-primary hover:bg-wellness-light px-8 py-6 text-lg">
-                Chat with AI Therapist
+              <Button variant="outline" className="border-wellness-primary text-wellness-primary hover:bg-wellness-light px-8 py-6 text-lg" asChild>
+                <Link to="/ai-therapist">Chat with AI Therapist</Link>
               </Button>
             </div>
           </div>

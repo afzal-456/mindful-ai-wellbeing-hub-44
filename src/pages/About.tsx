@@ -9,7 +9,8 @@ const About = () => {
     { name: "Dr. Sanjay Mehta", role: "Co-founder & Chief Medical Officer", avatar: "SM" },
     { name: "Priya Sharma", role: "Co-founder & CEO", avatar: "PS" },
     { name: "Arjun Kapoor", role: "Chief Technology Officer", avatar: "AK" },
-    { name: "Dr. Neha Gupta", role: "Head of Therapy", avatar: "NG" }
+    { name: "Dr. Neha Gupta", role: "Head of Therapy", avatar: "NG" },
+    { name: "Dr. Maya Patel", role: "Head of AI Research", avatar: "MP" }
   ];
 
   return (

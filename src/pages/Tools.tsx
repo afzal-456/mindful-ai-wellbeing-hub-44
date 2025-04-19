@@ -1,9 +1,9 @@
-
 import React from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Music, Gamepad2, BookOpen, Activity } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Tools = () => {
   return (
@@ -35,8 +35,8 @@ const Tools = () => {
                 <p className="text-gray-600 mb-6">
                   Curated music and guided meditations tuned to healing frequencies like 432 Hz for relaxation and 528 Hz for emotional balance.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white">
-                  Explore Audio Library
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white" asChild>
+                  <Link to="/relaxation-audio">Explore Audio Library</Link>
                 </Button>
               </div>
               
@@ -50,8 +50,8 @@ const Tools = () => {
                 <p className="text-gray-600 mb-6">
                   Interactive games and activities designed to reduce stress, improve focus, and build positive coping strategies.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white">
-                  Play Games
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white" asChild>
+                  <Link to="/mental-games">Play Games</Link>
                 </Button>
               </div>
               
@@ -65,8 +65,8 @@ const Tools = () => {
                 <p className="text-gray-600 mb-6">
                   Articles, guides, and exercises from mental health experts to help you understand and manage your emotional well-being.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white">
-                  Browse Resources
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white" asChild>
+                  <Link to="/self-help-resources">Browse Resources</Link>
                 </Button>
               </div>
               
@@ -80,8 +80,8 @@ const Tools = () => {
                 <p className="text-gray-600 mb-6">
                   Track your emotional patterns over time with our easy-to-use mood journal and get insights to better understand your mental health.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white">
-                  Start Tracking
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white" asChild>
+                  <Link to="/mood-tracking">Start Tracking</Link>
                 </Button>
               </div>
             </div>

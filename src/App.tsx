@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
@@ -15,6 +14,13 @@ import Tools from "./pages/Tools";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+
+import RelaxationAudio from "./pages/RelaxationAudio";
+import MentalGames from "./pages/MentalGames";
+import SelfHelpResources from "./pages/SelfHelpResources";
+import MoodTracking from "./pages/MoodTracking";
+import FreeTrial from "./pages/FreeTrial";
+import AiTherapist from "./pages/AiTherapist";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +39,12 @@ const App = () => (
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/therapy" element={<Therapy />} />
               <Route path="/tools" element={<Tools />} />
+              <Route path="/relaxation-audio" element={<RelaxationAudio />} />
+              <Route path="/mental-games" element={<MentalGames />} />
+              <Route path="/self-help-resources" element={<SelfHelpResources />} />
+              <Route path="/mood-tracking" element={<MoodTracking />} />
+              <Route path="/free-trial" element={<FreeTrial />} />
+              <Route path="/ai-therapist" element={<AiTherapist />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
