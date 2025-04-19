@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Calendar, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Therapy = () => {
   return (
@@ -33,8 +34,8 @@ const Therapy = () => {
                 <p className="text-gray-600 mb-6">
                   Chat with our AI therapist anytime for immediate support, coping strategies, and emotional guidance.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white w-full">
-                  Start Chatting
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white w-full" asChild>
+                  <Link to="/ai-therapist">Start Chatting</Link>
                 </Button>
               </div>
               
@@ -46,8 +47,8 @@ const Therapy = () => {
                 <p className="text-gray-600 mb-6">
                   Book one-on-one video sessions with licensed therapists specialized in various mental health areas.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white w-full">
-                  Book Session
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white w-full" asChild>
+                  <Link to="/live-sessions">Book Session</Link>
                 </Button>
               </div>
               
@@ -59,8 +60,8 @@ const Therapy = () => {
                 <p className="text-gray-600 mb-6">
                   Join moderated community groups to connect with others facing similar challenges.
                 </p>
-                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white w-full">
-                  Browse Groups
+                <Button className="bg-wellness-primary hover:bg-wellness-dark text-white w-full" asChild>
+                  <Link to="/support-groups">Browse Groups</Link>
                 </Button>
               </div>
             </div>

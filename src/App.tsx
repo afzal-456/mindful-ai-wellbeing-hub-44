@@ -14,13 +14,14 @@ import Tools from "./pages/Tools";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-
 import RelaxationAudio from "./pages/RelaxationAudio";
 import MentalGames from "./pages/MentalGames";
 import SelfHelpResources from "./pages/SelfHelpResources";
 import MoodTracking from "./pages/MoodTracking";
 import FreeTrial from "./pages/FreeTrial";
 import AiTherapist from "./pages/AiTherapist";
+import LiveSessions from "./pages/LiveSessions";
+import SupportGroups from "./pages/SupportGroups";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,8 @@ const App = () => (
               <Route path="/mood-tracking" element={<MoodTracking />} />
               <Route path="/free-trial" element={<FreeTrial />} />
               <Route path="/ai-therapist" element={<AiTherapist />} />
+              <Route path="/live-sessions" element={<LiveSessions />} />
+              <Route path="/support-groups" element={<SupportGroups />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
