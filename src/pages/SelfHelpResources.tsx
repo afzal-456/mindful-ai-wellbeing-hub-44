@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Video, FileText, Download } from "lucide-react";
+import { BookOpen, Video, FileText, Download, Play } from "lucide-react";
 import StressManagement from "@/components/resources/StressManagement";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
