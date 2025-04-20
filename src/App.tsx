@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
@@ -28,6 +27,9 @@ import SupportGroups from "./pages/SupportGroups";
 import FreePlan from "./pages/FreePlan";
 import PremiumPlan from "./pages/PremiumPlan";
 import InstitutionalPlan from "./pages/InstitutionalPlan";
+import AnxietySupport from "./pages/support-groups/AnxietySupport";
+import DepressionRecovery from "./pages/support-groups/DepressionRecovery";
+import MindfulnessPractice from "./pages/support-groups/MindfulnessPractice";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +63,9 @@ const App = () => (
               <Route path="/pricing/free" element={<FreePlan />} />
               <Route path="/pricing/premium" element={<PremiumPlan />} />
               <Route path="/pricing/institutional" element={<InstitutionalPlan />} />
+              <Route path="/support-groups/anxiety" element={<AnxietySupport />} />
+              <Route path="/support-groups/depression" element={<DepressionRecovery />} />
+              <Route path="/support-groups/mindfulness" element={<MindfulnessPractice />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

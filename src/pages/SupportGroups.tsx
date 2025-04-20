@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Users, Calendar, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SupportGroups = () => {
   return (
@@ -22,18 +23,21 @@ const SupportGroups = () => {
                 members: "15 members",
                 schedule: "Every Monday",
                 time: "7:00 PM - 8:30 PM",
+                link: "/support-groups/anxiety"
               },
               {
                 name: "Depression Recovery",
                 members: "12 members",
                 schedule: "Every Wednesday",
                 time: "6:00 PM - 7:30 PM",
+                link: "/support-groups/depression"
               },
               {
                 name: "Mindfulness Practice",
                 members: "20 members",
                 schedule: "Every Friday",
                 time: "5:00 PM - 6:30 PM",
+                link: "/support-groups/mindfulness"
               },
             ].map((group, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md p-6">
@@ -56,8 +60,8 @@ const SupportGroups = () => {
                   </div>
                 </div>
                 
-                <Button className="w-full bg-wellness-primary hover:bg-wellness-dark text-white">
-                  Join Group
+                <Button className="w-full bg-wellness-primary hover:bg-wellness-dark text-white" asChild>
+                  <Link to={group.link}>Join Group</Link>
                 </Button>
               </div>
             ))}
