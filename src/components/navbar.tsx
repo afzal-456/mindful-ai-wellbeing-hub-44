@@ -1,12 +1,43 @@
 
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userType, setUserType] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Check login status when component mounts or route changes
+    const loginStatus = localStorage.getItem("isLoggedIn") === "true";
+    const userTypeValue = localStorage.getItem("userType");
+    
+    setIsLoggedIn(loginStatus);
+    setUserType(userTypeValue);
+    
+    // Close mobile menu on route change
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+  
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userType");
+    setIsLoggedIn(false);
+    setUserType(null);
+    navigate("/login");
+  };
+  
+  const getDashboardLink = () => {
+    if (userType === "admin") {
+      return "/admin-dashboard";
+    }
+    return "/user-dashboard";
+  };
 
   return (
     <nav className="py-4 px-6 md:px-10 lg:px-20 flex items-center justify-between shadow-sm relative z-50 bg-white dark:bg-gray-900">
@@ -20,6 +51,7 @@ const Navbar = () => {
       <button 
         className="md:hidden p-2"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
         {isMenuOpen ? (
           <X className="h-6 w-6 text-wellness-dark" />
@@ -40,16 +72,36 @@ const Navbar = () => {
           <Link to="/tools" className="text-foreground hover:text-primary transition-colors">Tools</Link>
           <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
           <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
-          <Link to="/login">
-            <Button variant="ghost" className="w-full text-foreground hover:text-primary">
-              Login
-            </Button>
-          </Link>
-          <Link to="/signup">
-            <Button className="w-full bg-wellness-primary hover:bg-wellness-dark text-white">
-              Sign Up
-            </Button>
-          </Link>
+          
+          {isLoggedIn ? (
+            <>
+              <Link to={getDashboardLink()} className="text-foreground hover:text-primary transition-colors flex items-center">
+                <User className="mr-2 h-4 w-4" />
+                {userType === "admin" ? "Admin Dashboard" : "Dashboard"}
+              </Link>
+              <Button 
+                variant="ghost" 
+                className="justify-start w-full text-foreground hover:text-primary"
+                onClick={handleLogout}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button variant="ghost" className="w-full text-foreground hover:text-primary">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/signup">
+                <Button className="w-full bg-wellness-primary hover:bg-wellness-dark text-white">
+                  Sign Up
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       
@@ -61,12 +113,34 @@ const Navbar = () => {
         <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
         <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
         <ThemeToggle />
-        <Link to="/login">
-          <Button variant="ghost" className="text-foreground hover:text-primary">Login</Button>
-        </Link>
-        <Link to="/signup">
-          <Button className="bg-wellness-primary hover:bg-wellness-dark text-white">Sign Up</Button>
-        </Link>
+        
+        {isLoggedIn ? (
+          <>
+            <Link to={getDashboardLink()}>
+              <Button variant="ghost" className="text-foreground hover:text-primary">
+                <User className="mr-2 h-4 w-4" />
+                {userType === "admin" ? "Admin" : "Dashboard"}
+              </Button>
+            </Link>
+            <Button 
+              variant="outline" 
+              className="text-foreground hover:text-primary"
+              onClick={handleLogout}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">
+              <Button variant="ghost" className="text-foreground hover:text-primary">Login</Button>
+            </Link>
+            <Link to="/signup">
+              <Button className="bg-wellness-primary hover:bg-wellness-dark text-white">Sign Up</Button>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
