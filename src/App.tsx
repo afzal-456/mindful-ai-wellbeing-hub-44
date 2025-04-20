@@ -22,6 +22,9 @@ import FreeTrial from "./pages/FreeTrial";
 import AiTherapist from "./pages/AiTherapist";
 import LiveSessions from "./pages/LiveSessions";
 import SupportGroups from "./pages/SupportGroups";
+import FreePlan from "./pages/FreePlan";
+import PremiumPlan from "./pages/PremiumPlan";
+import InstitutionalPlan from "./pages/InstitutionalPlan";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +53,9 @@ const App = () => (
               <Route path="/support-groups" element={<SupportGroups />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing/free" element={<FreePlan />} />
+              <Route path="/pricing/premium" element={<PremiumPlan />} />
+              <Route path="/pricing/institutional" element={<InstitutionalPlan />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

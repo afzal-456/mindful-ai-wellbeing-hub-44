@@ -1,8 +1,8 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
   const plans = [
@@ -18,7 +18,8 @@ const Pricing = () => {
         "General mental health resources"
       ],
       buttonText: "Get Started",
-      buttonVariant: "outline" as const
+      buttonVariant: "outline" as const,
+      link: "/pricing/free"
     },
     {
       name: "Premium Plan",
@@ -35,7 +36,8 @@ const Pricing = () => {
       ],
       buttonText: "Start 7-Day Free Trial",
       buttonVariant: "default" as const,
-      highlight: true
+      highlight: true,
+      link: "/pricing/premium"
     },
     {
       name: "Institutional Plan",
@@ -51,7 +53,8 @@ const Pricing = () => {
         "White-label options"
       ],
       buttonText: "Contact Us",
-      buttonVariant: "outline" as const
+      buttonVariant: "outline" as const,
+      link: "/pricing/institutional"
     }
   ];
 
@@ -93,8 +96,11 @@ const Pricing = () => {
                 <Button 
                   variant={plan.buttonVariant} 
                   className={`w-full ${plan.buttonVariant === 'default' ? 'bg-wellness-primary hover:bg-wellness-dark' : 'border-wellness-primary text-wellness-primary hover:bg-wellness-light'}`}
+                  asChild
                 >
-                  {plan.buttonText}
+                  <Link to={plan.link}>
+                    {plan.buttonText}
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
