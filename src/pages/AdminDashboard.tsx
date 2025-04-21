@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/navbar";
@@ -20,6 +19,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import TeamMemberManager from "@/components/admin/TeamMemberManager";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();

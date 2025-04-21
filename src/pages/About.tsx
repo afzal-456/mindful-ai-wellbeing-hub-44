@@ -1,16 +1,40 @@
-
 import React from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const About = () => {
   const team = [
-    { name: "Moieen Rasheed Mir", role: "Frontend Developer ", avatar: "MRM" },
-    { name: "Mohammed Saqlain", role: "Ml Developer", avatar: "SQ" },
-    { name: "Mohammed Afzal", role: "Backend Developer", avatar: "MA" },
-    { name: "Milan Saini", role: "Ai Chatbot", avatar: "MS" },
-    { name: "Mayank Nager", role: "Web Designer", avatar: "MN" }
+    { 
+      name: "Moieen Rasheed Mir", 
+      role: "Frontend Developer", 
+      avatar: "MRM",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+    },
+    { 
+      name: "Mohammed Saqlain", 
+      role: "ML Developer", 
+      avatar: "SQ",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+    },
+    { 
+      name: "Mohammed Afzal", 
+      role: "Backend Developer", 
+      avatar: "MA",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+    },
+    { 
+      name: "Milan Saini", 
+      role: "AI Chatbot", 
+      avatar: "MS",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+    },
+    { 
+      name: "Mayank Nager", 
+      role: "Web Designer", 
+      avatar: "MN",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+    }
   ];
 
   return (
@@ -88,10 +112,14 @@ const About = () => {
               A diverse group of experts passionate about mental health innovation
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {team.map((member, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-md">
-                  <Avatar className="w-24 h-24 mb-4 mx-auto bg-wellness-primary text-white">
+                <div 
+                  key={index} 
+                  className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  <Avatar className="w-32 h-32 mb-4 mx-auto">
+                    <AvatarImage src={member.image} alt={member.name} />
                     <AvatarFallback>{member.avatar}</AvatarFallback>
                   </Avatar>
                   <h3 className="text-lg font-semibold text-wellness-dark">{member.name}</h3>
