@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { LogIn, User } from "lucide-react";
+import { LogIn } from "lucide-react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ export default function Login() {
         localStorage.setItem("userType", "admin");
         localStorage.setItem("isLoggedIn", "true");
         toast.success("Welcome back, Admin!");
-        navigate("/admin-dashboard");
+        navigate("/admin");  // Changed to /admin for clarity
       } else if (email && password.length >= 6) {
         localStorage.setItem("userType", "user");
         localStorage.setItem("isLoggedIn", "true");

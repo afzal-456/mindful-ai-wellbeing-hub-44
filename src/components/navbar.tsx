@@ -34,9 +34,16 @@ const Navbar = () => {
   
   const getDashboardLink = () => {
     if (userType === "admin") {
-      return "/admin-dashboard";
+      return "/admin";  // Changed from /admin-dashboard to /admin
     }
     return "/user-dashboard";
+  };
+
+  const getDashboardText = () => {
+    if (userType === "admin") {
+      return "Admin Panel";  // More descriptive text for admin users
+    }
+    return "Dashboard";
   };
 
   return (
@@ -67,17 +74,21 @@ const Navbar = () => {
         ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
       `}>
         <div className="flex flex-col p-4 space-y-4">
-          <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-          <Link to="/therapy" className="text-foreground hover:text-primary transition-colors">Therapy</Link>
-          <Link to="/tools" className="text-foreground hover:text-primary transition-colors">Tools</Link>
-          <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
-          <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
+          {!isLoggedIn || userType !== "admin" ? (
+            <>
+              <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
+              <Link to="/therapy" className="text-foreground hover:text-primary transition-colors">Therapy</Link>
+              <Link to="/tools" className="text-foreground hover:text-primary transition-colors">Tools</Link>
+              <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
+              <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
+            </>
+          ) : null}
           
           {isLoggedIn ? (
             <>
               <Link to={getDashboardLink()} className="text-foreground hover:text-primary transition-colors flex items-center">
                 <User className="mr-2 h-4 w-4" />
-                {userType === "admin" ? "Admin Dashboard" : "Dashboard"}
+                {getDashboardText()}
               </Link>
               <Button 
                 variant="ghost" 
@@ -107,11 +118,16 @@ const Navbar = () => {
       
       {/* Desktop menu */}
       <div className="hidden md:flex items-center space-x-6">
-        <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-        <Link to="/therapy" className="text-foreground hover:text-primary transition-colors">Therapy</Link>
-        <Link to="/tools" className="text-foreground hover:text-primary transition-colors">Tools</Link>
-        <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
-        <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
+        {!isLoggedIn || userType !== "admin" ? (
+          <>
+            <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
+            <Link to="/therapy" className="text-foreground hover:text-primary transition-colors">Therapy</Link>
+            <Link to="/tools" className="text-foreground hover:text-primary transition-colors">Tools</Link>
+            <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
+            <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
+          </>
+        ) : null}
+        
         <ThemeToggle />
         
         {isLoggedIn ? (
@@ -119,7 +135,7 @@ const Navbar = () => {
             <Link to={getDashboardLink()}>
               <Button variant="ghost" className="text-foreground hover:text-primary">
                 <User className="mr-2 h-4 w-4" />
-                {userType === "admin" ? "Admin" : "Dashboard"}
+                {getDashboardText()}
               </Button>
             </Link>
             <Button 
