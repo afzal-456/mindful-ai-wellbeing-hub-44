@@ -14,13 +14,21 @@ import {
   FileText,
   BarChart4,
   BellRing,
-  Upload
+  Upload,
+  Calendar,
+  Video,
+  Gamepad2,
+  Heart
 } from "lucide-react";
 import AdminMoodTrends from "@/components/admin/AdminMoodTrends";
 import AdminRelaxationUploader from "@/components/admin/AdminRelaxationUploader";
 import AdminContentManager from "@/components/admin/AdminContentManager";
 import AdminDistressAlerts from "@/components/admin/AdminDistressAlerts";
 import AdminTherapistNotes from "@/components/admin/AdminTherapistNotes";
+import AdminAiTherapist from "@/components/admin/AdminAiTherapist";
+import AdminLiveSessions from "@/components/admin/AdminLiveSessions";
+import AdminSupportGroups from "@/components/admin/AdminSupportGroups";
+import AdminMentalGames from "@/components/admin/AdminMentalGames";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -119,14 +127,30 @@ export default function AdminDashboard() {
           
           {/* Admin Features Tabs */}
           <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-            <TabsList className="grid grid-cols-3 md:grid-cols-6 gap-2">
+            <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-2">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <BarChart4 className="h-4 w-4" />
                 <span className="hidden md:inline">Overview</span>
               </TabsTrigger>
+              <TabsTrigger value="ai-therapist" className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4" />
+                <span className="hidden md:inline">AI Therapist</span>
+              </TabsTrigger>
+              <TabsTrigger value="live-sessions" className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                <span className="hidden md:inline">Live Sessions</span>
+              </TabsTrigger>
+              <TabsTrigger value="support-groups" className="flex items-center gap-2">
+                <Heart className="h-4 w-4" />
+                <span className="hidden md:inline">Support Groups</span>
+              </TabsTrigger>
               <TabsTrigger value="music" className="flex items-center gap-2">
                 <Music className="h-4 w-4" />
                 <span className="hidden md:inline">Music</span>
+              </TabsTrigger>
+              <TabsTrigger value="games" className="flex items-center gap-2">
+                <Gamepad2 className="h-4 w-4" />
+                <span className="hidden md:inline">Games</span>
               </TabsTrigger>
               <TabsTrigger value="content" className="flex items-center gap-2">
                 <FileText className="h-4 w-4" />
@@ -151,6 +175,36 @@ export default function AdminDashboard() {
               <p className="text-muted-foreground">Welcome to the admin panel for MindfulAI. Use the tabs above to manage different aspects of the platform.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Card className="hover:bg-accent/50 transition-colors cursor-pointer" onClick={() => setActiveTab("ai-therapist")}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <MessageSquare className="mr-2 h-5 w-5 text-wellness-primary" />
+                      AI Therapist
+                    </CardTitle>
+                    <CardDescription>Manage chatbot interactions and FAQs</CardDescription>
+                  </CardHeader>
+                </Card>
+                
+                <Card className="hover:bg-accent/50 transition-colors cursor-pointer" onClick={() => setActiveTab("live-sessions")}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Calendar className="mr-2 h-5 w-5 text-wellness-primary" />
+                      Live Sessions
+                    </CardTitle>
+                    <CardDescription>Manage therapist profiles and availability</CardDescription>
+                  </CardHeader>
+                </Card>
+                
+                <Card className="hover:bg-accent/50 transition-colors cursor-pointer" onClick={() => setActiveTab("support-groups")}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Heart className="mr-2 h-5 w-5 text-wellness-primary" />
+                      Support Groups
+                    </CardTitle>
+                    <CardDescription>Create and manage support groups</CardDescription>
+                  </CardHeader>
+                </Card>
+                
                 <Card className="hover:bg-accent/50 transition-colors cursor-pointer" onClick={() => setActiveTab("music")}>
                   <CardHeader>
                     <CardTitle className="flex items-center">
@@ -158,6 +212,16 @@ export default function AdminDashboard() {
                       Relaxation Music
                     </CardTitle>
                     <CardDescription>Upload and manage relaxation tracks</CardDescription>
+                  </CardHeader>
+                </Card>
+                
+                <Card className="hover:bg-accent/50 transition-colors cursor-pointer" onClick={() => setActiveTab("games")}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Gamepad2 className="mr-2 h-5 w-5 text-wellness-primary" />
+                      Mental Games
+                    </CardTitle>
+                    <CardDescription>Manage mental health games</CardDescription>
                   </CardHeader>
                 </Card>
                 
@@ -203,8 +267,24 @@ export default function AdminDashboard() {
               </div>
             </TabsContent>
             
+            <TabsContent value="ai-therapist">
+              <AdminAiTherapist />
+            </TabsContent>
+            
+            <TabsContent value="live-sessions">
+              <AdminLiveSessions />
+            </TabsContent>
+            
+            <TabsContent value="support-groups">
+              <AdminSupportGroups />
+            </TabsContent>
+            
             <TabsContent value="music">
               <AdminRelaxationUploader />
+            </TabsContent>
+            
+            <TabsContent value="games">
+              <AdminMentalGames />
             </TabsContent>
             
             <TabsContent value="content">
