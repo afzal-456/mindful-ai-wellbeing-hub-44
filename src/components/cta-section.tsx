@@ -22,7 +22,7 @@ const CTASection = () => {
           </Button>
           <Button 
             variant="outline" 
-            className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
+            className="border-white text-white opacity-0 hover:opacity-100 transition-opacity duration-300 px-8 py-6 text-lg"
             asChild
           >
             <Link to="/about">Learn More</Link>

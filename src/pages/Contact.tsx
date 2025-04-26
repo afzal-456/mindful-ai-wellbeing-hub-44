@@ -1,4 +1,3 @@
-
 import React from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -6,8 +5,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { toast } from "sonner";
 
 const Contact = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    
+    const newMessage = {
+      id: Date.now().toString(),
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+      date: new Date().toLocaleDateString()
+    };
+
+    const existingMessages = JSON.parse(localStorage.getItem("contactMessages") || "[]");
+    
+    const updatedMessages = [...existingMessages, newMessage];
+    
+    localStorage.setItem("contactMessages", JSON.stringify(updatedMessages));
+    
+    event.currentTarget.reset();
+    
+    toast.success("Message sent successfully!");
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -74,38 +98,40 @@ const Contact = () => {
                 <div className="bg-white rounded-lg shadow-md p-8">
                   <h2 className="text-2xl font-bold mb-6 text-wellness-dark">Send Us a Message</h2>
                   
-                  <form className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        <Label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                           Your Name
-                        </label>
-                        <Input id="name" placeholder="John Doe" className="w-full" />
+                        </Label>
+                        <Input id="name" name="name" placeholder="John Doe" className="w-full" required />
                       </div>
                       
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        <Label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                           Email Address
-                        </label>
-                        <Input id="email" type="email" placeholder="john@example.com" className="w-full" />
+                        </Label>
+                        <Input id="email" name="email" type="email" placeholder="john@example.com" className="w-full" required />
                       </div>
                     </div>
                     
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                      <Label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                         Subject
-                      </label>
-                      <Input id="subject" placeholder="How can we help you?" className="w-full" />
+                      </Label>
+                      <Input id="subject" name="subject" placeholder="How can we help you?" className="w-full" required />
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                      <Label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                         Message
-                      </label>
+                      </Label>
                       <Textarea 
                         id="message" 
+                        name="message"
                         placeholder="Please provide details about your inquiry..." 
                         className="w-full min-h-[150px]" 
+                        required
                       />
                     </div>
                     
