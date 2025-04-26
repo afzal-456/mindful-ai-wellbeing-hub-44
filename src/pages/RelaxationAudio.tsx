@@ -7,6 +7,38 @@ import { Play, Pause, SkipForward, SkipBack, Volume2 } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { Card } from "@/components/ui/card";
 
+// Define audioTracks data
+const audioTracks = [
+  {
+    id: 1,
+    title: "Deep Ocean Waves",
+    description: "Calming ocean waves for deep relaxation and sleep",
+    duration: "30 min",
+    url: "https://assets.mixkit.co/music/preview/mixkit-quiet-time-868.mp3"
+  },
+  {
+    id: 2,
+    title: "Forest Rain Meditation",
+    description: "Gentle rain sounds in a forest setting for meditation",
+    duration: "45 min",
+    url: "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3"
+  },
+  {
+    id: 3,
+    title: "432Hz Healing Frequency",
+    description: "Pure 432Hz frequency for chakra balancing and healing",
+    duration: "60 min",
+    url: "https://assets.mixkit.co/music/preview/mixkit-sleepy-cat-135.mp3"
+  },
+  {
+    id: 4,
+    title: "528Hz Transformation",
+    description: "The miracle tone for positive transformation and DNA repair",
+    duration: "60 min",
+    url: "https://assets.mixkit.co/music/preview/mixkit-deep-meditation-109.mp3"
+  }
+];
+
 const RelaxationAudio = () => {
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
