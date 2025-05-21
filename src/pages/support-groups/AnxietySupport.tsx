@@ -3,15 +3,29 @@ import React from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Users, Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Users, Calendar, ArrowLeft } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const AnxietySupport = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow py-16 px-6 md:px-10 lg:px-20">
         <div className="container mx-auto max-w-4xl">
+          <div className="flex justify-between items-center mb-8">
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2"
+              onClick={() => navigate("/support-groups")}
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to Support Groups
+            </Button>
+            <ThemeToggle />
+          </div>
+          
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold mb-4 text-wellness-dark">Anxiety Support Group</h1>
             <p className="text-gray-600 max-w-2xl mx-auto">Join our supportive community to share experiences and learn coping strategies for anxiety.</p>

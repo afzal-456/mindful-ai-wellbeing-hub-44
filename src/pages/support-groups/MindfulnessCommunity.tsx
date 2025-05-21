@@ -11,41 +11,40 @@ import { Users, MessageSquare, Image, Video, Heart, BookmarkIcon, Calendar, Arro
 import { ThemeToggle } from "@/components/theme-toggle";
 
 // Setting all users as premium
-const isPremiumUser = true; // Set to true as requested
+const isPremiumUser = true;
 
 // Mock posts data
 const initialPosts = [
   {
     id: 1,
-    author: "MindfulJourney",
-    content: "I've been experiencing panic attacks at work lately. Has anyone found any quick techniques to manage these in a professional setting without drawing attention?",
-    likes: 12,
-    comments: 5,
-    time: "2 hours ago",
+    author: "ZenJourney",
+    content: "I've been practicing mindful eating for a week. Taking time to truly experience my food has been transformative. Anyone else tried this practice?",
+    likes: 21,
+    comments: 8,
+    time: "4 hours ago",
     type: "text"
   },
   {
     id: 2,
-    author: "AnxietyWarrior",
-    content: "Today I used the 5-4-3-2-1 grounding technique during an anxiety attack and it really helped! 5 things you see, 4 things you touch, 3 things you hear, 2 things you smell, 1 thing you taste. Has anyone else tried this?",
-    likes: 24,
-    comments: 8,
-    time: "5 hours ago",
+    author: "PresentMoment",
+    content: "Looking for recommendations on mindfulness meditation apps that offer guided sessions around 10-15 minutes. Which ones have worked for you?",
+    likes: 15,
+    comments: 12,
+    time: "7 hours ago",
     type: "text"
   },
   {
     id: 3,
-    author: "HealingSteps",
-    content: "Made a big accomplishment today - I drove on the highway for the first time in 2 years after developing driving anxiety. Small steps add up!",
-    likes: 45,
-    comments: 15,
+    author: "MindfulBreather",
+    content: "Today I practiced the 4-7-8 breathing technique during a stressful meeting and it helped me stay centered. Breathe in for 4 counts, hold for 7, exhale for 8.",
+    likes: 32,
+    comments: 9,
     time: "1 day ago",
     type: "text"
   },
 ];
 
-const AnxietyCommunity = () => {
-  const [showPremiumDialog, setShowPremiumDialog] = useState(false); // Changed to false since all users are premium
+const MindfulnessCommunity = () => {
   const [newPostContent, setNewPostContent] = useState("");
   const [posts, setPosts] = useState(initialPosts);
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const AnxietyCommunity = () => {
 
     const newPost = {
       id: posts.length + 1,
-      author: "CurrentUser", // In a real app, this would be the logged-in user's name
+      author: "CurrentUser",
       content: newPostContent,
       likes: 0,
       comments: 0,
@@ -89,9 +88,9 @@ const AnxietyCommunity = () => {
             <Button 
               variant="outline" 
               className="flex items-center gap-2"
-              onClick={() => navigate("/support-groups/anxiety")}
+              onClick={() => navigate("/support-groups/mindfulness")}
             >
-              <ArrowLeft className="h-4 w-4" /> Back to Anxiety Support
+              <ArrowLeft className="h-4 w-4" /> Back to Mindfulness Practice
             </Button>
             <ThemeToggle />
           </div>
@@ -103,18 +102,18 @@ const AnxietyCommunity = () => {
                 <CardHeader>
                   <CardTitle className="text-wellness-dark flex items-center gap-2">
                     <Users className="h-5 w-5" /> 
-                    Anxiety Support
+                    Mindfulness Practice
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
                       <Users className="h-4 w-4 text-wellness-primary" />
-                      <span>15 members active</span>
+                      <span>20 members active</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-wellness-primary" />
-                      <span>Next session: Monday</span>
+                      <span>Next session: Friday</span>
                     </div>
                   </div>
                 </CardContent>
@@ -126,11 +125,11 @@ const AnxietyCommunity = () => {
                 </CardHeader>
                 <CardContent>
                   <ul className="text-sm space-y-2 text-gray-600">
-                    <li>• Be respectful and supportive</li>
-                    <li>• Maintain confidentiality</li>
-                    <li>• No medical advice</li>
-                    <li>• No self-promotion</li>
-                    <li>• Report concerning content</li>
+                    <li>• Respect each other's journey</li>
+                    <li>• Share only personal experiences</li>
+                    <li>• No judgmental comments</li>
+                    <li>• Maintain a calm atmosphere</li>
+                    <li>• Focus on present-moment awareness</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -146,7 +145,7 @@ const AnxietyCommunity = () => {
                 <CardContent>
                   <form onSubmit={handlePostSubmit}>
                     <Textarea 
-                      placeholder="What's on your mind? Share your experiences or ask questions..."
+                      placeholder="Share your mindfulness practice, insights, or questions..."
                       className="min-h-[100px]"
                       value={newPostContent}
                       onChange={(e) => setNewPostContent(e.target.value)}
@@ -227,19 +226,19 @@ const AnxietyCommunity = () => {
                     <li>
                       <Link to="/self-help-resources" className="text-wellness-primary hover:underline flex items-center">
                         <BookmarkIcon className="h-4 w-4 mr-2" />
-                        Anxiety Management Tools
+                        Meditation Guides
                       </Link>
                     </li>
                     <li>
                       <Link to="/relaxation-audio" className="text-wellness-primary hover:underline flex items-center">
                         <BookmarkIcon className="h-4 w-4 mr-2" />
-                        Relaxation Audios
+                        Mindfulness Audio Sessions
                       </Link>
                     </li>
                     <li>
-                      <Link to="/therapy" className="text-wellness-primary hover:underline flex items-center">
+                      <Link to="/mental-games" className="text-wellness-primary hover:underline flex items-center">
                         <BookmarkIcon className="h-4 w-4 mr-2" />
-                        Find a Therapist
+                        Focus Training Exercises
                       </Link>
                     </li>
                   </ul>
@@ -253,16 +252,16 @@ const AnxietyCommunity = () => {
                 <CardContent>
                   <div className="space-y-3">
                     <div className="border-l-2 border-wellness-primary pl-3">
-                      <p className="font-medium">Group Discussion</p>
-                      <p className="text-sm text-gray-600">Monday, 7:00 PM</p>
-                    </div>
-                    <div className="border-l-2 border-wellness-primary pl-3">
-                      <p className="font-medium">Coping Strategies Workshop</p>
-                      <p className="text-sm text-gray-600">Wednesday, 6:00 PM</p>
-                    </div>
-                    <div className="border-l-2 border-wellness-primary pl-3">
-                      <p className="font-medium">Mindfulness Session</p>
+                      <p className="font-medium">Mindful Breathing</p>
                       <p className="text-sm text-gray-600">Friday, 5:00 PM</p>
+                    </div>
+                    <div className="border-l-2 border-wellness-primary pl-3">
+                      <p className="font-medium">Body Scan Meditation</p>
+                      <p className="text-sm text-gray-600">Saturday, 10:00 AM</p>
+                    </div>
+                    <div className="border-l-2 border-wellness-primary pl-3">
+                      <p className="font-medium">Walking Meditation</p>
+                      <p className="text-sm text-gray-600">Sunday, 9:00 AM</p>
                     </div>
                   </div>
                 </CardContent>
@@ -276,4 +275,4 @@ const AnxietyCommunity = () => {
   );
 };
 
-export default AnxietyCommunity;
+export default MindfulnessCommunity;
