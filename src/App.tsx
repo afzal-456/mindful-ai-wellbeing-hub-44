@@ -34,6 +34,7 @@ import MindfulnessPractice from "./pages/support-groups/MindfulnessPractice";
 import AnxietyCommunity from "./pages/support-groups/AnxietyCommunity";
 import DepressionCommunity from "./pages/support-groups/DepressionCommunity";
 import MindfulnessCommunity from "./pages/support-groups/MindfulnessCommunity";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,7 @@ const App = () => (
               <Route path="/support-groups/anxiety/community" element={<AnxietyCommunity />} />
               <Route path="/support-groups/depression/community" element={<DepressionCommunity />} />
               <Route path="/support-groups/mindfulness/community" element={<MindfulnessCommunity />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
