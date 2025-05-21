@@ -27,20 +27,20 @@ const AnxietySupport = () => {
           </div>
           
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-wellness-dark">Anxiety Support Group</h1>
-            <p className="text-gray-600 max-w-2xl mx-auto">Join our supportive community to share experiences and learn coping strategies for anxiety.</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-wellness-dark dark:text-wellness-light">Anxiety Support Group</h1>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Join our supportive community to share experiences and learn coping strategies for anxiety.</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8 dark:bg-gray-800 dark:text-gray-200">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="w-full md:w-2/3">
                 <h2 className="text-xl font-semibold mb-4">Next Session Details</h2>
                 <div className="space-y-4 mb-6">
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Calendar className="h-5 w-5 mr-2" />
                     <span>Every Monday, 7:00 PM - 8:30 PM</span>
                   </div>
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Users className="h-5 w-5 mr-2" />
                     <span>15 members (5 spots available)</span>
                   </div>
@@ -53,9 +53,9 @@ const AnxietySupport = () => {
                 </Button>
               </div>
 
-              <div className="w-full md:w-1/3 bg-wellness-light p-6 rounded-lg">
+              <div className="w-full md:w-1/3 bg-wellness-light p-6 rounded-lg dark:bg-gray-700">
                 <h3 className="font-semibold mb-3">What to Expect</h3>
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                   <li>• Supportive environment</li>
                   <li>• Professional moderation</li>
                   <li>• Coping strategies</li>
