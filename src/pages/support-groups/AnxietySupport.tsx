@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Users, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AnxietySupport = () => {
   return (
@@ -30,8 +31,11 @@ const AnxietySupport = () => {
                     <span>15 members (5 spots available)</span>
                   </div>
                 </div>
-                <Button className="w-full md:w-auto bg-wellness-primary hover:bg-wellness-dark text-white">
-                  Join Group Session
+                <Button 
+                  className="w-full md:w-auto bg-wellness-primary hover:bg-wellness-dark text-white"
+                  asChild
+                >
+                  <Link to="/support-groups/anxiety/community">Join Group Session</Link>
                 </Button>
               </div>
 
