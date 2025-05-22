@@ -35,6 +35,7 @@ import AnxietyCommunity from "./pages/support-groups/AnxietyCommunity";
 import DepressionCommunity from "./pages/support-groups/DepressionCommunity";
 import MindfulnessCommunity from "./pages/support-groups/MindfulnessCommunity";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -50,32 +51,122 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/user-dashboard" element={<UserDashboard />} />
-              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/therapy" element={<Therapy />} />
-              <Route path="/tools" element={<Tools />} />
-              <Route path="/relaxation-audio" element={<RelaxationAudio />} />
-              <Route path="/mental-games" element={<MentalGames />} />
-              <Route path="/self-help-resources" element={<SelfHelpResources />} />
-              <Route path="/mood-tracking" element={<MoodTracking />} />
-              <Route path="/free-trial" element={<FreeTrial />} />
-              <Route path="/ai-therapist" element={<AiTherapist />} />
-              <Route path="/live-sessions" element={<LiveSessions />} />
-              <Route path="/support-groups" element={<SupportGroups />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/pricing/free" element={<FreePlan />} />
-              <Route path="/pricing/premium" element={<PremiumPlan />} />
-              <Route path="/pricing/institutional" element={<InstitutionalPlan />} />
-              <Route path="/support-groups/anxiety" element={<AnxietySupport />} />
-              <Route path="/support-groups/depression" element={<DepressionRecovery />} />
-              <Route path="/support-groups/mindfulness" element={<MindfulnessPractice />} />
-              <Route path="/support-groups/anxiety/community" element={<AnxietyCommunity />} />
-              <Route path="/support-groups/depression/community" element={<DepressionCommunity />} />
-              <Route path="/support-groups/mindfulness/community" element={<MindfulnessCommunity />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
+              
+              {/* Protected Routes */}
+              <Route path="/user-dashboard" element={
+                <ProtectedRoute>
+                  <UserDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/therapy" element={
+                <ProtectedRoute>
+                  <Therapy />
+                </ProtectedRoute>
+              } />
+              <Route path="/tools" element={
+                <ProtectedRoute>
+                  <Tools />
+                </ProtectedRoute>
+              } />
+              <Route path="/relaxation-audio" element={
+                <ProtectedRoute>
+                  <RelaxationAudio />
+                </ProtectedRoute>
+              } />
+              <Route path="/mental-games" element={
+                <ProtectedRoute>
+                  <MentalGames />
+                </ProtectedRoute>
+              } />
+              <Route path="/self-help-resources" element={
+                <ProtectedRoute>
+                  <SelfHelpResources />
+                </ProtectedRoute>
+              } />
+              <Route path="/mood-tracking" element={
+                <ProtectedRoute>
+                  <MoodTracking />
+                </ProtectedRoute>
+              } />
+              <Route path="/free-trial" element={
+                <ProtectedRoute>
+                  <FreeTrial />
+                </ProtectedRoute>
+              } />
+              <Route path="/ai-therapist" element={
+                <ProtectedRoute>
+                  <AiTherapist />
+                </ProtectedRoute>
+              } />
+              <Route path="/live-sessions" element={
+                <ProtectedRoute>
+                  <LiveSessions />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups" element={
+                <ProtectedRoute>
+                  <SupportGroups />
+                </ProtectedRoute>
+              } />
+              <Route path="/pricing/free" element={
+                <ProtectedRoute>
+                  <FreePlan />
+                </ProtectedRoute>
+              } />
+              <Route path="/pricing/premium" element={
+                <ProtectedRoute>
+                  <PremiumPlan />
+                </ProtectedRoute>
+              } />
+              <Route path="/pricing/institutional" element={
+                <ProtectedRoute>
+                  <InstitutionalPlan />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups/anxiety" element={
+                <ProtectedRoute>
+                  <AnxietySupport />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups/depression" element={
+                <ProtectedRoute>
+                  <DepressionRecovery />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups/mindfulness" element={
+                <ProtectedRoute>
+                  <MindfulnessPractice />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups/anxiety/community" element={
+                <ProtectedRoute>
+                  <AnxietyCommunity />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups/depression/community" element={
+                <ProtectedRoute>
+                  <DepressionCommunity />
+                </ProtectedRoute>
+              } />
+              <Route path="/support-groups/mindfulness/community" element={
+                <ProtectedRoute>
+                  <MindfulnessCommunity />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
