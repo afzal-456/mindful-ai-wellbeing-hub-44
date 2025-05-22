@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { Users, MessageSquare, Image, Video, Heart, BookmarkIcon, Calendar, ArrowLeft } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 // Setting all users as premium
 const isPremiumUser = true; // Set to true as requested
@@ -93,7 +92,6 @@ const AnxietyCommunity = () => {
             >
               <ArrowLeft className="h-4 w-4" /> Back to Anxiety Support
             </Button>
-            <ThemeToggle />
           </div>
           
           <div className="flex flex-col md:flex-row gap-6">

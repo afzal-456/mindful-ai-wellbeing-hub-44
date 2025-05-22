@@ -1,6 +1,5 @@
 
 import React from "react";
-import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -41,137 +40,135 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <React.StrictMode>
-    <ThemeProvider defaultTheme="system" enableSystem>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-              
-              {/* Protected Routes */}
-              <Route path="/user-dashboard" element={
-                <ProtectedRoute>
-                  <UserDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin" element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/therapy" element={
-                <ProtectedRoute>
-                  <Therapy />
-                </ProtectedRoute>
-              } />
-              <Route path="/tools" element={
-                <ProtectedRoute>
-                  <Tools />
-                </ProtectedRoute>
-              } />
-              <Route path="/relaxation-audio" element={
-                <ProtectedRoute>
-                  <RelaxationAudio />
-                </ProtectedRoute>
-              } />
-              <Route path="/mental-games" element={
-                <ProtectedRoute>
-                  <MentalGames />
-                </ProtectedRoute>
-              } />
-              <Route path="/self-help-resources" element={
-                <ProtectedRoute>
-                  <SelfHelpResources />
-                </ProtectedRoute>
-              } />
-              <Route path="/mood-tracking" element={
-                <ProtectedRoute>
-                  <MoodTracking />
-                </ProtectedRoute>
-              } />
-              <Route path="/free-trial" element={
-                <ProtectedRoute>
-                  <FreeTrial />
-                </ProtectedRoute>
-              } />
-              <Route path="/ai-therapist" element={
-                <ProtectedRoute>
-                  <AiTherapist />
-                </ProtectedRoute>
-              } />
-              <Route path="/live-sessions" element={
-                <ProtectedRoute>
-                  <LiveSessions />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups" element={
-                <ProtectedRoute>
-                  <SupportGroups />
-                </ProtectedRoute>
-              } />
-              <Route path="/pricing/free" element={
-                <ProtectedRoute>
-                  <FreePlan />
-                </ProtectedRoute>
-              } />
-              <Route path="/pricing/premium" element={
-                <ProtectedRoute>
-                  <PremiumPlan />
-                </ProtectedRoute>
-              } />
-              <Route path="/pricing/institutional" element={
-                <ProtectedRoute>
-                  <InstitutionalPlan />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups/anxiety" element={
-                <ProtectedRoute>
-                  <AnxietySupport />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups/depression" element={
-                <ProtectedRoute>
-                  <DepressionRecovery />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups/mindfulness" element={
-                <ProtectedRoute>
-                  <MindfulnessPractice />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups/anxiety/community" element={
-                <ProtectedRoute>
-                  <AnxietyCommunity />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups/depression/community" element={
-                <ProtectedRoute>
-                  <DepressionCommunity />
-                </ProtectedRoute>
-              } />
-              <Route path="/support-groups/mindfulness/community" element={
-                <ProtectedRoute>
-                  <MindfulnessCommunity />
-                </ProtectedRoute>
-              } />
-              <Route path="/profile" element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              } />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+            
+            {/* Protected Routes */}
+            <Route path="/user-dashboard" element={
+              <ProtectedRoute>
+                <UserDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/therapy" element={
+              <ProtectedRoute>
+                <Therapy />
+              </ProtectedRoute>
+            } />
+            <Route path="/tools" element={
+              <ProtectedRoute>
+                <Tools />
+              </ProtectedRoute>
+            } />
+            <Route path="/relaxation-audio" element={
+              <ProtectedRoute>
+                <RelaxationAudio />
+              </ProtectedRoute>
+            } />
+            <Route path="/mental-games" element={
+              <ProtectedRoute>
+                <MentalGames />
+              </ProtectedRoute>
+            } />
+            <Route path="/self-help-resources" element={
+              <ProtectedRoute>
+                <SelfHelpResources />
+              </ProtectedRoute>
+            } />
+            <Route path="/mood-tracking" element={
+              <ProtectedRoute>
+                <MoodTracking />
+              </ProtectedRoute>
+            } />
+            <Route path="/free-trial" element={
+              <ProtectedRoute>
+                <FreeTrial />
+              </ProtectedRoute>
+            } />
+            <Route path="/ai-therapist" element={
+              <ProtectedRoute>
+                <AiTherapist />
+              </ProtectedRoute>
+            } />
+            <Route path="/live-sessions" element={
+              <ProtectedRoute>
+                <LiveSessions />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups" element={
+              <ProtectedRoute>
+                <SupportGroups />
+              </ProtectedRoute>
+            } />
+            <Route path="/pricing/free" element={
+              <ProtectedRoute>
+                <FreePlan />
+              </ProtectedRoute>
+            } />
+            <Route path="/pricing/premium" element={
+              <ProtectedRoute>
+                <PremiumPlan />
+              </ProtectedRoute>
+            } />
+            <Route path="/pricing/institutional" element={
+              <ProtectedRoute>
+                <InstitutionalPlan />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups/anxiety" element={
+              <ProtectedRoute>
+                <AnxietySupport />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups/depression" element={
+              <ProtectedRoute>
+                <DepressionRecovery />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups/mindfulness" element={
+              <ProtectedRoute>
+                <MindfulnessPractice />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups/anxiety/community" element={
+              <ProtectedRoute>
+                <AnxietyCommunity />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups/depression/community" element={
+              <ProtectedRoute>
+                <DepressionCommunity />
+              </ProtectedRoute>
+            } />
+            <Route path="/support-groups/mindfulness/community" element={
+              <ProtectedRoute>
+                <MindfulnessCommunity />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

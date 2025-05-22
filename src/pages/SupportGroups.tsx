@@ -5,7 +5,6 @@ import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Users, Calendar, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const SupportGroups = () => {
   return (
@@ -17,7 +16,6 @@ const SupportGroups = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-wellness-dark">
               Support Groups
             </h1>
-            <ThemeToggle />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
