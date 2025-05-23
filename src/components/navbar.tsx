@@ -47,12 +47,6 @@ const Navbar = () => {
 
   return (
     <nav className="py-4 px-6 md:px-10 lg:px-20 flex items-center justify-between shadow-sm relative z-50 bg-white dark:bg-gray-900">
-      <div className="flex items-center">
-        <Link to="/" className="text-xl font-semibold text-wellness-dark flex items-center">
-          <span className="text-wellness-primary mr-2">Mindful</span>AI
-        </Link>
-      </div>
-      
       {/* Mobile menu button */}
       <button 
         className="md:hidden p-2"
@@ -126,7 +120,9 @@ const Navbar = () => {
             <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
           </>
         ) : null}
+      </div>
         
+      <div className="flex items-center space-x-4">
         {isLoggedIn ? (
           <>
             <Link to={getDashboardLink()}>

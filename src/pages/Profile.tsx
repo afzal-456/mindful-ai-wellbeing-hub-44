@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -10,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { calculateBMI, getBMICategory } from "@/lib/calculate-bmi";
-import { User, UserRound, Weight, Calendar, ArrowLeft, Ruler, Mars, Venus } from "lucide-react";
+import { User, UserRound, Weight, Calendar, ArrowLeft, Ruler } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
@@ -200,9 +199,9 @@ export default function Profile() {
                     <div>
                       <Label htmlFor="gender" className="flex items-center">
                         {gender === 'male' ? (
-                          <Mars className="mr-2 h-4 w-4" />
+                          <UserRound className="mr-2 h-4 w-4" />
                         ) : gender === 'female' ? (
-                          <Venus className="mr-2 h-4 w-4" />
+                          <UserRound className="mr-2 h-4 w-4" />
                         ) : (
                           <UserRound className="mr-2 h-4 w-4" />
                         )}
