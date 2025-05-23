@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { calculateBMI, getBMICategory } from "@/lib/calculate-bmi";
-import { User, UserRound, Weight, Calendar, ArrowLeft } from "lucide-react";
+import { User, UserRound, Weight, Calendar, ArrowLeft, Ruler, Male, Female } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
@@ -199,7 +199,13 @@ export default function Profile() {
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="gender" className="flex items-center">
-                        <UserRound className="mr-2 h-4 w-4" />
+                        {gender === 'male' ? (
+                          <Male className="mr-2 h-4 w-4" />
+                        ) : gender === 'female' ? (
+                          <Female className="mr-2 h-4 w-4" />
+                        ) : (
+                          <UserRound className="mr-2 h-4 w-4" />
+                        )}
                         Gender
                       </Label>
                       <Select
@@ -238,7 +244,7 @@ export default function Profile() {
                     
                     <div>
                       <Label htmlFor="height" className="flex items-center">
-                        <ArrowLeft className="mr-2 h-4 w-4 rotate-90" />
+                        <Ruler className="mr-2 h-4 w-4" />
                         Height (cm)
                       </Label>
                       <Input
