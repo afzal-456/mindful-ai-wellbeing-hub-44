@@ -15,12 +15,18 @@ const PaymentMethods = () => {
   const [selectedMethod, setSelectedMethod] = useState<string>("card");
 
   const handleContinue = () => {
-    if (selectedMethod === "card") {
-      // Navigate to card payment form
-      navigate("/payment/card" + location.search);
+    const routeMap = {
+      card: "/payment/card",
+      banking: "/payment/banking",
+      gpay: "/payment/gpay",
+      phonepe: "/payment/phonepe"
+    };
+
+    const route = routeMap[selectedMethod as keyof typeof routeMap];
+    if (route) {
+      navigate(route + location.search);
     } else {
-      // For other payment methods, show a coming soon message
-      toast.info("This payment method will be available soon!");
+      toast.error("Invalid payment method selected");
     }
   };
 
@@ -39,19 +45,19 @@ const PaymentMethods = () => {
       id: "banking",
       name: "Internet Banking",
       icon: <Building className="h-5 w-5" />,
-      available: false
+      available: true
     },
     {
       id: "gpay",
       name: "Google Pay",
       icon: <Smartphone className="h-5 w-5" />,
-      available: false
+      available: true
     },
     {
       id: "phonepe",
       name: "PhonePe",
       icon: <Smartphone className="h-5 w-5" />,
-      available: false
+      available: true
     }
   ];
 

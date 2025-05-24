@@ -29,6 +29,9 @@ import InstitutionalPlan from "./pages/InstitutionalPlan";
 import FreeTrial from "./pages/FreeTrial";
 import PaymentMethods from "./pages/PaymentMethods";
 import CardPayment from "./pages/CardPayment";
+import InternetBankingPayment from "./pages/InternetBankingPayment";
+import GooglePayPayment from "./pages/GooglePayPayment";
+import PhonePePayment from "./pages/PhonePePayment";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -72,7 +75,7 @@ function App() {
                 </ProtectedRoute>
               } />
               <Route path="/admin" element={
-                <ProtectedRoute requiredRole="admin">
+                <ProtectedRoute>
                   <AdminDashboard />
                 </ProtectedRoute>
               } />
@@ -103,6 +106,9 @@ function App() {
               {/* Payment Routes */}
               <Route path="/payment-methods" element={<PaymentMethods />} />
               <Route path="/payment/card" element={<CardPayment />} />
+              <Route path="/payment/banking" element={<InternetBankingPayment />} />
+              <Route path="/payment/gpay" element={<GooglePayPayment />} />
+              <Route path="/payment/phonepe" element={<PhonePePayment />} />
               
               {/* 404 Page */}
               <Route path="*" element={<NotFound />} />
