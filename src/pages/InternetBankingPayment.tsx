@@ -30,8 +30,16 @@ const InternetBankingPayment = () => {
       return;
     }
 
-    // Redirect to bank simulation page
-    navigate(`/payment/bank-redirect?bank=${selectedBank}${location.search ? '&' + location.search.substring(1) : ''}`);
+    // Simulate payment processing
+    if (isSessionBooking) {
+      toast.success("Session payment successful! Your session has been booked.");
+    } else {
+      toast.success("Payment successful! You are now a premium member.");
+      localStorage.setItem("userType", "premium");
+    }
+    
+    // Navigate to success page
+    navigate("/");
   };
 
   const banks = [

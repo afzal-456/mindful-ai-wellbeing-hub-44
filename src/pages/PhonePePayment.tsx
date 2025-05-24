@@ -36,8 +36,16 @@ const PhonePePayment = () => {
       return;
     }
 
-    // Navigate to OTP verification page
-    navigate(`/payment/otp-verification?method=phonepe&phone=${phoneNumber}${location.search ? '&' + location.search.substring(1) : ''}`);
+    // Simulate payment processing
+    if (isSessionBooking) {
+      toast.success("Session payment successful! Your session has been booked.");
+    } else {
+      toast.success("Payment successful! You are now a premium member.");
+      localStorage.setItem("userType", "premium");
+    }
+    
+    // Navigate to success page
+    navigate("/");
   };
 
   return (
@@ -113,7 +121,7 @@ const PhonePePayment = () => {
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white py-3"
                 disabled={!phoneNumber || phoneNumber.length !== 10}
               >
-                Send OTP
+                Pay with PhonePe
               </Button>
             </div>
           </div>

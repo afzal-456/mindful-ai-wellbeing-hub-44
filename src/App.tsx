@@ -32,8 +32,6 @@ import CardPayment from "./pages/CardPayment";
 import InternetBankingPayment from "./pages/InternetBankingPayment";
 import GooglePayPayment from "./pages/GooglePayPayment";
 import PhonePePayment from "./pages/PhonePePayment";
-import BankRedirect from "./pages/BankRedirect";
-import OtpVerification from "./pages/OtpVerification";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -111,8 +109,6 @@ function App() {
               <Route path="/payment/banking" element={<InternetBankingPayment />} />
               <Route path="/payment/gpay" element={<GooglePayPayment />} />
               <Route path="/payment/phonepe" element={<PhonePePayment />} />
-              <Route path="/payment/bank-redirect" element={<BankRedirect />} />
-              <Route path="/payment/otp-verification" element={<OtpVerification />} />
               
               {/* 404 Page */}
               <Route path="*" element={<NotFound />} />
