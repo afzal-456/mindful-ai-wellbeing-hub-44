@@ -36,16 +36,8 @@ const GooglePayPayment = () => {
       return;
     }
 
-    // Simulate payment processing
-    if (isSessionBooking) {
-      toast.success("Session payment successful! Your session has been booked.");
-    } else {
-      toast.success("Payment successful! You are now a premium member.");
-      localStorage.setItem("userType", "premium");
-    }
-    
-    // Navigate to success page
-    navigate("/");
+    // Navigate to OTP verification page
+    navigate(`/payment/otp-verification?method=gpay&phone=${phoneNumber}${location.search ? '&' + location.search.substring(1) : ''}`);
   };
 
   return (
@@ -121,7 +113,7 @@ const GooglePayPayment = () => {
                 className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white py-3"
                 disabled={!phoneNumber || phoneNumber.length !== 10}
               >
-                Pay with Google Pay
+                Send OTP
               </Button>
             </div>
           </div>

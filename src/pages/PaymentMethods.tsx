@@ -6,13 +6,14 @@ import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, CreditCard, Building, Smartphone } from "lucide-react";
+import { ArrowLeft, CreditCard, Building, Smartphone, Wallet } from "lucide-react";
 import { toast } from "sonner";
 
 const PaymentMethods = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedMethod, setSelectedMethod] = useState<string>("card");
+  const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
 
   const handleContinue = () => {
     const routeMap = {
@@ -26,7 +27,7 @@ const PaymentMethods = () => {
     if (route) {
       navigate(route + location.search);
     } else {
-      toast.error("Invalid payment method selected");
+      toast.error("Payment method not available yet");
     }
   };
 
@@ -34,7 +35,7 @@ const PaymentMethods = () => {
     navigate(-1);
   };
 
-  const paymentMethods = [
+  const mainPaymentMethods = [
     {
       id: "card",
       name: "Debit / Credit card",
@@ -61,6 +62,37 @@ const PaymentMethods = () => {
     }
   ];
 
+  const additionalPaymentMethods = [
+    {
+      id: "paytm",
+      name: "Paytm",
+      icon: <Wallet className="h-5 w-5" />,
+      available: false
+    },
+    {
+      id: "applepay",
+      name: "Apple Pay",
+      icon: <Smartphone className="h-5 w-5" />,
+      available: false
+    },
+    {
+      id: "amazonpay",
+      name: "Amazon Pay",
+      icon: <Wallet className="h-5 w-5" />,
+      available: false
+    },
+    {
+      id: "mobikwik",
+      name: "MobiKwik",
+      icon: <Wallet className="h-5 w-5" />,
+      available: false
+    }
+  ];
+
+  const allMethods = showMoreOptions 
+    ? [...mainPaymentMethods, ...additionalPaymentMethods]
+    : mainPaymentMethods;
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
@@ -86,7 +118,7 @@ const PaymentMethods = () => {
               onValueChange={setSelectedMethod}
               className="space-y-3"
             >
-              {paymentMethods.map((method) => (
+              {allMethods.map((method) => (
                 <div
                   key={method.id}
                   className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-colors ${
@@ -107,6 +139,9 @@ const PaymentMethods = () => {
                   >
                     <div className="text-blue-500">{method.icon}</div>
                     <span className="text-gray-900 font-medium">{method.name}</span>
+                    {!method.available && (
+                      <span className="text-xs text-gray-500 ml-auto">Coming Soon</span>
+                    )}
                   </Label>
                   {selectedMethod === method.id && method.available && (
                     <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
@@ -121,14 +156,15 @@ const PaymentMethods = () => {
               <Button
                 variant="outline"
                 className="w-full py-3 text-gray-600 border-gray-300"
+                onClick={() => setShowMoreOptions(!showMoreOptions)}
               >
-                + Add another option
+                {showMoreOptions ? "- Show less options" : "+ Add another option"}
               </Button>
 
               <Button
                 onClick={handleContinue}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
-                disabled={!paymentMethods.find(m => m.id === selectedMethod)?.available}
+                disabled={!allMethods.find(m => m.id === selectedMethod)?.available}
               >
                 Continue
               </Button>
