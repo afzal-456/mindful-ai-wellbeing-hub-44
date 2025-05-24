@@ -35,6 +35,13 @@ import DepressionCommunity from "./pages/support-groups/DepressionCommunity";
 import MindfulnessCommunity from "./pages/support-groups/MindfulnessCommunity";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PaymentMethods from "./pages/PaymentMethods";
+import CardPayment from "./pages/CardPayment";
+import InternetBankingPayment from "./pages/InternetBankingPayment";
+import GooglePayPayment from "./pages/GooglePayPayment";
+import PhonePePayment from "./pages/PhonePePayment";
+import OTPVerification from "./pages/OTPVerification";
+import PaymentFailed from "./pages/PaymentFailed";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +60,15 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
+            
+            {/* Payment Routes */}
+            <Route path="/payment-methods" element={<PaymentMethods />} />
+            <Route path="/payment/card" element={<CardPayment />} />
+            <Route path="/payment/internet-banking" element={<InternetBankingPayment />} />
+            <Route path="/payment/google-pay" element={<GooglePayPayment />} />
+            <Route path="/payment/phonepe" element={<PhonePePayment />} />
+            <Route path="/payment/otp" element={<OTPVerification />} />
+            <Route path="/payment-failed" element={<PaymentFailed />} />
             
             {/* Protected Routes */}
             <Route path="/user-dashboard" element={

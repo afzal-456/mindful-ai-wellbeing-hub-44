@@ -1,15 +1,15 @@
 
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const PremiumPlan = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isSessionBooking, setIsSessionBooking] = useState<boolean>(false);
 
   useEffect(() => {
@@ -19,13 +19,8 @@ const PremiumPlan = () => {
   }, [location]);
 
   const handlePayment = () => {
-    // In a real app, this would integrate with a payment gateway
-    if (isSessionBooking) {
-      toast.success("Session payment successful! Your session has been booked.");
-    } else {
-      toast.success("Payment successful! You are now a premium member.");
-      localStorage.setItem("userType", "premium");
-    }
+    // Navigate to payment methods selection
+    navigate("/payment-methods");
   };
 
   return (
