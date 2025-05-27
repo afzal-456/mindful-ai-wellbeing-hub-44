@@ -1,4 +1,6 @@
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,19 +68,118 @@ export default function Signup() {
   const navigate = useNavigate();
 
 
-  const handleGoogleSignup = async () => {
-  const userData = await signInWithGoogle();
-    if (userData) {
-      localStorage.setItem("userType", "user");
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userEmail", userData.email);
-      localStorage.setItem("userName", userData.name);
-      toast.success(`Welcome ${userData.name}`);
-      navigate("/user-dashboard");
+  
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const db = getFirestore();
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const email = result.user.email;
+
+    const allowedUsersRef = collection(db, "allowedUsers");
+    const q = query(allowedUsersRef, where("email", "==", email));
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      const existing = snapshot.docs[0].data();
+      if (existing.provider !== "google") {
+        alert("This email is already registered with a different method.");
+        await auth.signOut();
+        return;
+      }
     } else {
-      toast.error("Google sign-up failed");
+      // New Google user — allow
+      await setDoc(doc(db, "allowedUsers", result.user.uid), {
+        email,
+        provider: "google",
+        createdAt: new Date()
+      });
     }
-  };
+
+    // redirect to dashboard
+  } catch (error) {
+    alert("Google login failed: " + error.message);
+  }
+};
+
+  const handleSignup = async (data: SignupFormData) => {
+  const auth = getAuth();
+  const db = getFirestore();
+  const { email, password } = data;
+
+  // Check if email already exists in allowedUsers
+  const allowedUsersRef = collection(db, "allowedUsers");
+  const q = query(allowedUsersRef, where("email", "==", email));
+  const snapshot = await getDocs(q);
+
+  if (!snapshot.empty) {
+    alert("This email is already registered with another account.");
+    return;
+  }
+
+  try {
+    // Create user in Firebase Auth
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const uid = userCredential.user.uid;
+
+    // Store user email in allowedUsers
+    await setDoc(doc(db, "allowedUsers", uid), {
+      email,
+      provider: "password",
+      createdAt: new Date(),
+    });
+
+    // Store full profile in a separate 'users' collection
+    await setDoc(doc(db, "users", uid), {
+      ...data,
+      profileImage,
+      bmi,
+      createdAt: new Date(),
+    });
+
+    // Proceed
+    localStorage.setItem("userType", "premium");
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", data.name);
+    localStorage.setItem("userEmail", data.email);
+    localStorage.setItem("userAge", data.age || "");
+    localStorage.setItem("userGender", data.gender);
+    localStorage.setItem("userWeight", data.weight || "");
+    localStorage.setItem("userHeight", data.height || "");
+    localStorage.setItem("userBMI", bmi);
+    localStorage.setItem("userProfileImage", profileImage);
+
+    toast.success("Account created successfully!");
+    navigate("/user-dashboard");
+  } catch (error: any) {
+    alert("Signup error: " + error.message);
+  }
+
+  console.log("Creating user in Firebase Auth...");
+const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+const uid = userCredential.user.uid;
+console.log("Firebase Auth UID:", uid);
+
+console.log("Adding to allowedUsers...");
+await setDoc(doc(db, "allowedUsers", uid), {
+  email,
+  provider: "password",
+  createdAt: new Date(),
+});
+console.log("allowedUsers entry created.");
+
+console.log("Adding to users collection...");
+await setDoc(doc(db, "users", uid), {
+  ...data,
+  profileImage,
+  bmi,
+  createdAt: new Date(),
+});
+console.log("users entry created.");
+};
+
 
 
   const form = useForm<SignupFormData>({
@@ -127,37 +228,21 @@ export default function Signup() {
     }
   };
 
-  const onSubmit = (data: SignupFormData) => {
-    if (step === 1) {
-      handleNextStep();
-      return;
-    }
-    
-    setIsLoading(true);
-    
-    // Calculate BMI before saving
-    if (data.weight && data.height) {
-      calculateUserBMI(data.weight, data.height);
-    }
-    
-    // Simulate user registration
-    setTimeout(() => {
-      setIsLoading(false);
-      localStorage.setItem("userType", "premium");
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userName", data.name);
-      localStorage.setItem("userEmail", data.email);
-      localStorage.setItem("userAge", data.age || "");
-      localStorage.setItem("userGender", data.gender);
-      localStorage.setItem("userWeight", data.weight || "");
-      localStorage.setItem("userHeight", data.height || "");
-      localStorage.setItem("userBMI", bmi);
-      localStorage.setItem("userProfileImage", profileImage);
-      
-      toast.success("Account created successfully!");
-      navigate("/user-dashboard");
-    }, 1500);
-  };
+  const onSubmit = async (data: SignupFormData) => {
+  if (step === 1) {
+    handleNextStep();
+    return;
+  }
+
+  setIsLoading(true);
+  if (data.weight && data.height) {
+    calculateUserBMI(data.weight, data.height);
+  }
+
+  await handleSignup(data);  // <-- Must be called here
+  setIsLoading(false);
+};
+
 
   return (
     <>
@@ -563,7 +648,7 @@ export default function Signup() {
               </Button>
               <Button
                 type="button"
-                onClick={handleGoogleSignup}
+                onClick={handleGoogleLogin}
                 className="w-full bg-red-600 hover:bg-red-700 text-white"
               >
                 Sign up with Google

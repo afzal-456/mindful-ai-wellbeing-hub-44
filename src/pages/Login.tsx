@@ -8,8 +8,15 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { LogIn } from "lucide-react";
 import { signInWithGoogle } from "@/lib/googleSignIn";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
 export default function Login() {
+
+
+
+
   const navigate = useNavigate();
 
   // Define the list of allowed admin emails for Google login
@@ -21,6 +28,9 @@ export default function Login() {
     '22cs75@ecajmer.ac.in',
     '22cs73@ecajmer.ac.in',
   ].map(email => email.toLowerCase()); // IMPORTANT: Convert to lowercase here
+
+
+  
 
   const handleGoogleLogin = async () => {
     const userData = await signInWithGoogle();
@@ -55,35 +65,63 @@ export default function Login() {
     }
   };
 
+  const db = getFirestore();
+const auth = getAuth();
+
+const handleLogin = async (email: string, password: string) => {
+  const allowedUsersRef = collection(db, "allowedUsers");
+  const q = query(allowedUsersRef, where("email", "==", email));
+  const snapshot = await getDocs(q);
+
+  if (snapshot.empty) {
+    alert("This email is not authorized to log in.");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    // navigate to dashboard or next page
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+};
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    // Simulate authentication
-    setTimeout(() => {
+  try {
+    const allowedUsersRef = collection(db, "allowedUsers");
+    const q = query(allowedUsersRef, where("email", "==", email));
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
       setIsLoading(false);
-      // Keep your existing hardcoded admin for traditional login if needed
-      if (email === "admin@mindfulai.com" && password === "admin123") {
-        localStorage.setItem("userType", "admin");
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userEmail", email);
-        toast.success("Welcome back, Admin!");
-        navigate("/admin");
-      } else if (email && password.length >= 6) {
-        localStorage.setItem("userType", "user"); // Default for traditional login
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userEmail", email);
-        toast.success("Login successful!");
-        navigate("/user-dashboard");
-      } else {
-        toast.error("Invalid credentials. Please try again.");
-      }
-    }, 1500);
-  };
+      toast.error("This email is not authorized to log in.");
+      return;
+    }
+
+    await signInWithEmailAndPassword(auth, email, password);
+
+    const isAdmin = email === "admin@mindfulai.com";
+    localStorage.setItem("userType", isAdmin ? "admin" : "user");
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", email);
+
+    toast.success(`Welcome back, ${isAdmin ? "Admin" : "User"}!`);
+    navigate(isAdmin ? "/admin" : "/user-dashboard");
+  } catch (error: any) {
+    setIsLoading(false);
+    toast.error("Login failed: " + error.message);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <>
