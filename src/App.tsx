@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -60,7 +59,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
-            
+
             {/* Payment Routes */}
             <Route path="/payment-methods" element={<PaymentMethods />} />
             <Route path="/payment/card" element={<CardPayment />} />
@@ -69,15 +68,16 @@ const App = () => (
             <Route path="/payment/phonepe" element={<PhonePePayment />} />
             <Route path="/payment/otp" element={<OTPVerification />} />
             <Route path="/payment-failed" element={<PaymentFailed />} />
-            
+
             {/* Protected Routes */}
             <Route path="/user-dashboard" element={
               <ProtectedRoute>
                 <UserDashboard />
               </ProtectedRoute>
             } />
+            {/* Admin-only route */}
             <Route path="/admin" element={
-              <ProtectedRoute>
+              <ProtectedRoute adminOnly={true}> {/* Add adminOnly prop here */}
                 <AdminDashboard />
               </ProtectedRoute>
             } />

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,40 +10,71 @@ import { LogIn } from "lucide-react";
 import { signInWithGoogle } from "@/lib/googleSignIn";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  // Define the list of allowed admin emails for Google login
+  // Convert all admin emails to lowercase to ensure case-insensitive comparison
+  const adminGoogleEmails = [
+    'aaashu.1666@gmail.com',
+    '22cs77@ecajmer.ac.in',
+    '22cs76@ecajmer.ac.in',
+    '22cs75@ecajmer.ac.in',
+    '22cs73@ecajmer.ac.in',
+  ].map(email => email.toLowerCase()); // IMPORTANT: Convert to lowercase here
 
   const handleGoogleLogin = async () => {
-  const userData = await signInWithGoogle();
-  if (userData) {
-    localStorage.setItem("userType", "user");
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userEmail", userData.email);
-    localStorage.setItem("userName", userData.name);
-    toast.success(`Welcome ${userData.name}`);
-    navigate("/user-dashboard");
-  } else {
-    toast.error("Google sign-in failed");
-  }
-};
+    const userData = await signInWithGoogle();
+    if (userData) {
+      const userEmail = userData.email;
+      const normalizedUserEmail = userEmail.toLowerCase(); // Normalize the incoming email to lowercase
+
+      console.log("Google Login User Data:", userData); // Log entire user data
+      console.log("Raw Google email:", userEmail);
+      console.log("Normalized Google email:", normalizedUserEmail);
+      console.log("Admin emails configured:", adminGoogleEmails);
+
+      // Check if the normalized logged-in Google email is in the adminGoogleEmails list
+      if (adminGoogleEmails.includes(normalizedUserEmail)) {
+        console.log("Admin email matched! Setting userType to 'admin'.");
+        localStorage.setItem("userType", "admin"); // Set to admin
+        toast.success(`Welcome Admin, ${userData.name}!`);
+        navigate("/admin");
+      } else {
+        console.log("Not an admin email. Setting userType to 'user'.");
+        localStorage.setItem("userType", "user"); // Default to user
+        toast.success(`Welcome ${userData.name}`);
+        navigate("/user-dashboard");
+      }
+
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", userEmail); // Store the original email
+      localStorage.setItem("userName", userData.name);
+    } else {
+      console.error("Google sign-in failed."); // Log failure
+      toast.error("Google sign-in failed");
+    }
+  };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate authentication
     setTimeout(() => {
       setIsLoading(false);
+      // Keep your existing hardcoded admin for traditional login if needed
       if (email === "admin@mindfulai.com" && password === "admin123") {
         localStorage.setItem("userType", "admin");
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userEmail", email);
         toast.success("Welcome back, Admin!");
-        navigate("/admin");  // Changed to /admin for clarity
+        navigate("/admin");
       } else if (email && password.length >= 6) {
-        localStorage.setItem("userType", "user");
+        localStorage.setItem("userType", "user"); // Default for traditional login
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userEmail", email);
         toast.success("Login successful!");
@@ -65,7 +95,7 @@ export default function Login() {
             <h2 className="mt-6 text-3xl font-bold text-foreground">Welcome back</h2>
             <p className="mt-2 text-sm text-muted-foreground">Sign in to your account</p>
           </div>
-          
+
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
             <div className="space-y-4">
               <div>
@@ -99,22 +129,22 @@ export default function Login() {
               </div>
             </div>
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-wellness-primary hover:bg-wellness-dark text-white"
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign in"}
             </Button>
             <Button
-            type="button"
-            onClick={handleGoogleLogin}
-            className="w-full bg-red-600 hover:bg-red-700 text-white"
-          >
-            Sign in with Google
-          </Button>
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full bg-red-600 hover:bg-red-700 text-white"
+            >
+              Sign in with Google
+            </Button>
 
-            
+
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Don't have an account? </span>
               <Link to="/signup" className="text-primary hover:underline">
