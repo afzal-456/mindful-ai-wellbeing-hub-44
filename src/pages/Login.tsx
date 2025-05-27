@@ -8,8 +8,24 @@ import { toast } from "sonner";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { LogIn } from "lucide-react";
+import { signInWithGoogle } from "@/lib/googleSignIn";
 
 export default function Login() {
+
+  const handleGoogleLogin = async () => {
+  const userData = await signInWithGoogle();
+  if (userData) {
+    localStorage.setItem("userType", "user");
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", userData.email);
+    localStorage.setItem("userName", userData.name);
+    toast.success(`Welcome ${userData.name}`);
+    navigate("/user-dashboard");
+  } else {
+    toast.error("Google sign-in failed");
+  }
+};
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -90,6 +106,14 @@ export default function Login() {
             >
               {isLoading ? "Signing in..." : "Sign in"}
             </Button>
+            <Button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full bg-red-600 hover:bg-red-700 text-white"
+          >
+            Sign in with Google
+          </Button>
+
             
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Don't have an account? </span>

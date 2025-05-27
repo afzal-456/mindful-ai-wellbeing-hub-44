@@ -18,6 +18,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
+import { signInWithGoogle } from "@/lib/googleSignIn";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { calculateBMI } from "@/lib/calculate-bmi";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -63,6 +64,22 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+
+
+  const handleGoogleSignup = async () => {
+  const userData = await signInWithGoogle();
+    if (userData) {
+      localStorage.setItem("userType", "user");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", userData.email);
+      localStorage.setItem("userName", userData.name);
+      toast.success(`Welcome ${userData.name}`);
+      navigate("/user-dashboard");
+    } else {
+      toast.error("Google sign-up failed");
+    }
+  };
+
 
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -542,8 +559,16 @@ export default function Signup() {
                   ? "Creating account..." 
                   : step === 1 
                     ? "Continue" 
-                    : "Create Account"}
+                    : "Create Account"}~
               </Button>
+              <Button
+                type="button"
+                onClick={handleGoogleSignup}
+                className="w-full bg-red-600 hover:bg-red-700 text-white"
+              >
+                Sign up with Google
+              </Button>
+
               
               {step === 2 && (
                 <Button 
