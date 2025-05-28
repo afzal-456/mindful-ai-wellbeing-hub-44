@@ -23,10 +23,6 @@ export default function Login() {
   // Convert all admin emails to lowercase to ensure case-insensitive comparison
   const adminGoogleEmails = [
     'aaashu.1666@gmail.com',
-    '22cs77@ecajmer.ac.in',
-    '22cs76@ecajmer.ac.in',
-    '22cs75@ecajmer.ac.in',
-    '22cs73@ecajmer.ac.in',
   ].map(email => email.toLowerCase()); // IMPORTANT: Convert to lowercase here
 
 
@@ -38,10 +34,6 @@ export default function Login() {
       const userEmail = userData.email;
       const normalizedUserEmail = userEmail.toLowerCase(); // Normalize the incoming email to lowercase
 
-      console.log("Google Login User Data:", userData); // Log entire user data
-      console.log("Raw Google email:", userEmail);
-      console.log("Normalized Google email:", normalizedUserEmail);
-      console.log("Admin emails configured:", adminGoogleEmails);
 
       // Check if the normalized logged-in Google email is in the adminGoogleEmails list
       if (adminGoogleEmails.includes(normalizedUserEmail)) {
@@ -68,30 +60,13 @@ export default function Login() {
   const db = getFirestore();
 const auth = getAuth();
 
-const handleLogin = async (email: string, password: string) => {
-  const allowedUsersRef = collection(db, "allowedUsers");
-  const q = query(allowedUsersRef, where("email", "==", email));
-  const snapshot = await getDocs(q);
-
-  if (snapshot.empty) {
-    alert("This email is not authorized to log in.");
-    return;
-  }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    // navigate to dashboard or next page
-  } catch (error) {
-    alert("Login failed: " + error.message);
-  }
-};
 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsLoading(true);
 
@@ -108,6 +83,14 @@ const handleLogin = async (email: string, password: string) => {
 
     await signInWithEmailAndPassword(auth, email, password);
 
+    // ✅ Email verification check here
+    if (!auth.currentUser?.emailVerified) {
+      await auth.signOut();
+      setIsLoading(false);
+      toast.error("Please verify your email before logging in.");
+      return;
+    }
+
     const isAdmin = email === "admin@mindfulai.com";
     localStorage.setItem("userType", isAdmin ? "admin" : "user");
     localStorage.setItem("isLoggedIn", "true");
@@ -122,6 +105,7 @@ const handleLogin = async (email: string, password: string) => {
     setIsLoading(false);
   }
 };
+
 
   return (
     <>

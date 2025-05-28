@@ -20,6 +20,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
+import { sendEmailVerification } from "firebase/auth";
 import { signInWithGoogle } from "@/lib/googleSignIn";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { calculateBMI } from "@/lib/calculate-bmi";
@@ -77,6 +78,7 @@ const handleGoogleLogin = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     const email = result.user.email;
+    const isVerified = result.user.emailVerified;
 
     const allowedUsersRef = collection(db, "allowedUsers");
     const q = query(allowedUsersRef, where("email", "==", email));
@@ -90,7 +92,6 @@ const handleGoogleLogin = async () => {
         return;
       }
     } else {
-      // New Google user — allow
       await setDoc(doc(db, "allowedUsers", result.user.uid), {
         email,
         provider: "google",
@@ -98,18 +99,25 @@ const handleGoogleLogin = async () => {
       });
     }
 
+    if (!isVerified) {
+      alert("Please verify your Google email before proceeding.");
+      await auth.signOut();
+      return;
+    }
+
     // redirect to dashboard
-  } catch (error) {
+    navigate("/user-dashboard");
+  } catch (error: any) {
     alert("Google login failed: " + error.message);
   }
 };
+
 
   const handleSignup = async (data: SignupFormData) => {
   const auth = getAuth();
   const db = getFirestore();
   const { email, password } = data;
 
-  // Check if email already exists in allowedUsers
   const allowedUsersRef = collection(db, "allowedUsers");
   const q = query(allowedUsersRef, where("email", "==", email));
   const snapshot = await getDocs(q);
@@ -120,18 +128,15 @@ const handleGoogleLogin = async () => {
   }
 
   try {
-    // Create user in Firebase Auth
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const uid = userCredential.user.uid;
 
-    // Store user email in allowedUsers
     await setDoc(doc(db, "allowedUsers", uid), {
       email,
       provider: "password",
       createdAt: new Date(),
     });
 
-    // Store full profile in a separate 'users' collection
     await setDoc(doc(db, "users", uid), {
       ...data,
       profileImage,
@@ -139,46 +144,20 @@ const handleGoogleLogin = async () => {
       createdAt: new Date(),
     });
 
-    // Proceed
-    localStorage.setItem("userType", "premium");
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userName", data.name);
-    localStorage.setItem("userEmail", data.email);
-    localStorage.setItem("userAge", data.age || "");
-    localStorage.setItem("userGender", data.gender);
-    localStorage.setItem("userWeight", data.weight || "");
-    localStorage.setItem("userHeight", data.height || "");
-    localStorage.setItem("userBMI", bmi);
-    localStorage.setItem("userProfileImage", profileImage);
+    // Send email verification
+    await sendEmailVerification(auth.currentUser!);
 
-    toast.success("Account created successfully!");
-    navigate("/user-dashboard");
+    toast.success("Verification email sent. Please check your inbox.");
+
+    // Sign out until user verifies
+    await auth.signOut();
+
+    navigate("/login");
   } catch (error: any) {
     alert("Signup error: " + error.message);
   }
-
-  console.log("Creating user in Firebase Auth...");
-const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-const uid = userCredential.user.uid;
-console.log("Firebase Auth UID:", uid);
-
-console.log("Adding to allowedUsers...");
-await setDoc(doc(db, "allowedUsers", uid), {
-  email,
-  provider: "password",
-  createdAt: new Date(),
-});
-console.log("allowedUsers entry created.");
-
-console.log("Adding to users collection...");
-await setDoc(doc(db, "users", uid), {
-  ...data,
-  profileImage,
-  bmi,
-  createdAt: new Date(),
-});
-console.log("users entry created.");
 };
+
 
 
 
