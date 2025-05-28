@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "@/pages/ForgotPassword";
 import Therapy from "./pages/Therapy";
 import Tools from "./pages/Tools";
 import About from "./pages/About";
@@ -41,6 +41,7 @@ import GooglePayPayment from "./pages/GooglePayPayment";
 import PhonePePayment from "./pages/PhonePePayment";
 import OTPVerification from "./pages/OTPVerification";
 import PaymentFailed from "./pages/PaymentFailed";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* Payment Routes */}
             <Route path="/payment-methods" element={<PaymentMethods />} />
