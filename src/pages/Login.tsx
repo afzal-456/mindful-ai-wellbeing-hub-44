@@ -23,6 +23,10 @@ export default function Login() {
   // Convert all admin emails to lowercase to ensure case-insensitive comparison
   const adminGoogleEmails = [
     'aaashu.1666@gmail.com',
+    '22cs77@ecajmer.ac.in',
+    '22cs76@ecajmer.ac.in',
+    '22cs75@ecajmer.ac.in',
+    '22cs73@ecajmer.ac.in',
   ].map(email => email.toLowerCase()); // IMPORTANT: Convert to lowercase here
 
 
@@ -34,6 +38,10 @@ export default function Login() {
       const userEmail = userData.email;
       const normalizedUserEmail = userEmail.toLowerCase(); // Normalize the incoming email to lowercase
 
+      console.log("Google Login User Data:", userData); // Log entire user data
+      console.log("Raw Google email:", userEmail);
+      console.log("Normalized Google email:", normalizedUserEmail);
+      console.log("Admin emails configured:", adminGoogleEmails);
 
       // Check if the normalized logged-in Google email is in the adminGoogleEmails list
       if (adminGoogleEmails.includes(normalizedUserEmail)) {

@@ -43,6 +43,7 @@ import OTPVerification from "./pages/OTPVerification";
 import PaymentFailed from "./pages/PaymentFailed";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import ActionHandler from "./pages/ActionHandler";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/action" element={<ActionHandler />} />
+
 
 
             {/* Payment Routes */}
