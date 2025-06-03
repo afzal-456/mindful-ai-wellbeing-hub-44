@@ -1,73 +1,127 @@
-# Welcome to your Lovable project
+# MINDFUL-AI-WELLBEING-HUB-44
 
-## Project info
+## Overview
 
-**URL**: https://lovable.dev/projects/f23086e6-4162-49e4-a4d0-a18eb18336a8
+`MINDFUL-AI-WELLBEING-HUB-44` is a web application built using a **React**, **TypeScript**, **Tailwind CSS**, and **Vite** stack. It offers a platform for users to sign up, log in, and access various well-being resources like AI chatbots, live sessions, and community features. Admins can manage user data and permissions, including banning or deleting users from both the platform and Firebase Authentication.
 
-## How can I edit this code?
+The project integrates Firebase for user authentication and Firestore for database storage. The backend has been set up using **Firebase Admin SDK** to handle administrative tasks such as deleting users from both the Firestore database and Firebase Authentication.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## Table of Contents
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f23086e6-4162-49e4-a4d0-a18eb18336a8) and start prompting.
+1. [Installation](#installation)
+2. [Project Structure](#project-structure)
+3. [Features](#features)
+4. [Firebase Setup](#firebase-setup)
+5. [Backend Server](#backend-server)
+6. [Endpoints](#endpoints)
+7. [Environment Variables](#environment-variables)
+8. [Contributing](#contributing)
+9. [License](#license)
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Frontend
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+git clone https://github.com/afzal-456/mindful-ai-wellbeing-hub-44.git
+cd mindful-ai-wellbeing-hub-44
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Backend (Firebase Admin)
+Open another terminal and run : 
+```bash
+cd firebase-admin
+npm install express cors firebase-admin
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Download your Firebase service account key and save it as:
+```bash
+firebase-admin/service-account-key.json
+```
 
-**Use GitHub Codespaces**
+2. Start the backend server:
+```bash
+node server.cjs
+```
+## Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Frontend
+```bash
+/src
+├── /components
+├── /pages
+├── /hooks
+├── /utils
+├── App.tsx
+└── index.tsx
+```
+### Backend
+```bash
+/firebase-admin
+├── deleteUser.cjs
+├── server.cjs
+├── firebaseAdmin.cjs
+├── package.json
+└── service-account-key.json
+```
 
-## What technologies are used for this project?
+## Features
+- Firebase Authentication with email/password and Google login
 
-This project is built with:
+- Admin user management (delete/ban)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Firestore storage: users and allowedUsers
 
-## How can I deploy this project?
+- Express API backend for secure admin operation
 
-Simply open [Lovable](https://lovable.dev/projects/f23086e6-4162-49e4-a4d0-a18eb18336a8) and click on Share -> Publish.
+## Firebase Setup
 
-## Can I connect a custom domain to my Lovable project?
+### Authentication
 
-Yes, you can!
+- Enable Email/Password and Google providers in Firebase Console.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Firestore
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Create two collections:
+
+  *users
+
+  *allowedUsers
+Each document should include an `email` field.
+
+## Backend Server
+
+### Endpoints
+Delete User by UID
+```bash
+DELETE /api/delete-user/:uid
+```
+
+Delete User by Email
+```bash
+DELETE /api/delete-user-email/:email
+```
+
+## Environment Variables
+Set `PORT=5001` (optional) or change it in `server.cjs`. Make sure the path to `service-account-key.json` is correct in `deleteUser.cjs`.
+
+## Contributing
+
+1. Fork the repository
+
+2. Create a branch: `git checkout -b feature-name`
+
+3. Commit: `git commit -am 'Add feature'`
+
+4. Push: `git push origin feature-name`
+
+5. Open a Pull Request
+
+## License
+This project is licensed under the MIT License.
